@@ -37,9 +37,9 @@ class MTCNN():
             faces.append(Image.fromarray(warped_face))
         return boxes, faces
 
-    def detect_faces(self, image, min_face_size=20.0,
-                     thresholds=[0.6, 0.7, 0.8],
-                     nms_thresholds=[0.7, 0.7, 0.7]):
+    def detect_faces(self, image, min_face_size=40.0,
+                     thresholds=[0.01, 0.5, 0.5],
+                     nms_thresholds=[0.5, 0.5, 0.5]):
         """
         Arguments:
             image: an instance of PIL.Image.
@@ -86,6 +86,7 @@ class MTCNN():
                 bounding_boxes.append(boxes)
 
             # collect boxes (and offsets, and scores) from different scales
+            # print(bounding_boxes)
             bounding_boxes = [i for i in bounding_boxes if i is not None]
             bounding_boxes = np.vstack(bounding_boxes)
 

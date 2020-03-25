@@ -11,9 +11,9 @@ from utils import load_facebank, draw_box_name, prepare_facebank
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='for face verification')
-    parser.add_argument("-s", "--save", help="whether save",action="store_true")
-    parser.add_argument('-th','--threshold',help='threshold to decide identical faces',default=1.54, type=float)
-    parser.add_argument("-u", "--update", help="whether perform update the facebank",action="store_true")
+    parser.add_argument("-s", "--save", help="whether save",action="store_true",default=False)
+    parser.add_argument('-th','--threshold',help='threshold to decide identical faces',default=0.5, type=float)
+    parser.add_argument("-u", "--update", help="whether perform update the facebank",action="store_true", default=False)
     parser.add_argument("-tta", "--tta", help="whether test time augmentation",action="store_true")
     parser.add_argument("-c", "--score", help="whether show the confidence score",action="store_true")
     args = parser.parse_args()
@@ -26,7 +26,8 @@ if __name__ == '__main__':
     learner = face_learner(conf, True)
     learner.threshold = args.threshold
     if conf.device.type == 'cpu':
-        learner.load_state(conf, 'cpu_final.pth', True, True)
+        learner.load_state(conf, 'ir_se50.pth', False, True)
+        # learner.load_state(conf, 'mobilefacenet.pth', False, True)
     else:
         learner.load_state(conf, 'final.pth', True, True)
     learner.model.eval()
@@ -76,4 +77,4 @@ if __name__ == '__main__':
     cap.release()
     if args.save:
         video_writer.release()
-    cv2.destroyAllWindows()    
+    cv2.destroyAllWindows()
