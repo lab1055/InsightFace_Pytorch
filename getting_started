@@ -1,0 +1,7 @@
+Getting started:
+1) Copy model from https://1drv.ms/u/s!AhMqVPD44cDOhkPsOU2S_HFpY9dC in to work_space/models
+2) Add one (or two) photos of yours into <root>/data/facebank/<your_name>/*.jpg
+3) python face_verify.py --update (to register your face; need not use the update option after the one-time registration)
+
+Tested with Python 3.7.4 on Mac OS 10.15. Ran without GPU support.
+pip requirements are given in requirements.txt.
